@@ -51,7 +51,12 @@ header .profile span{
     color: #aaa;
 }
 
-.chart-drag .drag-contain.hovered {
+.chart-list.hovered{
+    border-style: dashed;
+    border-color: #84c2ff;
+}
+
+.chart-drag .drag-contain.hovered{
     background-color: #dfe9f3;
     border-style: dashed;
     border-color: #84c2ff;
@@ -79,6 +84,7 @@ header .profile span{
 .chart-list img,
 .drag-contain img {
     width: 100%;
+    cursor: move;
 }
 
 .chart-drag .drag-contain {
