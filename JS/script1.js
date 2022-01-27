@@ -1,7 +1,19 @@
-var images = document.querySelectorAll('img');
-var contains = document.querySelectorAll('.drag-contain');
-var chartlist = document.querySelector('.chart-list');
-var places = document.querySelectorAll('.place');
+let images = document.querySelectorAll('img');
+let contains = document.querySelectorAll('.drag-contain');
+let chartlist = document.querySelector('.chart-list');
+let places = document.querySelectorAll('.place');
+
+// Empty array to store the images
+let arrayOfImages = [];
+
+// Check if theres images in Local Storage
+if (localStorage.getItem("photos")) {
+    arrayOfImages = JSON.parse(localStorage.getItem("photos"));
+}
+
+//get data from local storage
+getDataFromLocalStorage();
+
 
 // Events
 for (var image of images) {
@@ -24,7 +36,7 @@ chartlist.addEventListener('drop', dragDrop);
 
 //Drag functions
 function dragStart(e) {
-    this.className += ' opacity';
+    //this.className += ' opacity';
     //setTimeout(() => (this.className += ' opacity') , 0);
     it = e.target;
 }
@@ -59,11 +71,65 @@ function dragDrop() {
                     break;
                 }
         }
+        //console.log(it.parentElement.innerHTML);
+        const photo = {
+            id: this.getAttribute('id'),
+            img: it.getAttribute('src'),
+        };
+
+        //push photo to array of images
+        var res = updateArray(photo, arrayOfImages);
+        if (!res) {
+            arrayOfImages.push(photo);
+        }
+
+        //Add photos to Local Storage
+        addDataToLocalStorage(arrayOfImages);
+        /*******************************************************/
     } else if (this.className == 'chart-list') {
         for (var list of places)
             if (list.childElementCount == 0) {
                 list.append(it);
                 break;
             }
+    }
+}
+
+
+function updateArray(photo, array) {
+    for (var i of array) {
+        if (i.id == photo.id) {
+            i.img = photo.img;
+            return true;
+        }
+    }
+    return false;
+}
+
+function addElementsToPageFrom(drags) {
+    for (var data of drags) {
+        for (var container of contains) {
+            if (data.id == container.getAttribute('id')) {
+                for (var image of images) {
+                    if(data.img == image.getAttribute('src')){
+                        container.append(image);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Local storage funcions
+
+function addDataToLocalStorage(arrayOfImages) {
+    window.localStorage.setItem("photos", JSON.stringify(arrayOfImages));
+}
+
+function getDataFromLocalStorage() {
+    let data = window.localStorage.getItem("photos");
+    if (data) {
+        let drags = JSON.parse(data);
+        addElementsToPageFrom(drags);
     }
 }
