@@ -7,8 +7,8 @@ let places = document.querySelectorAll('.place');
 let arrayOfImages = [];
 
 // Check if theres images in Local Storage
-if (localStorage.getItem("photos")) {
-    arrayOfImages = JSON.parse(localStorage.getItem("photos"));
+if (sessionStorage.getItem("photos")) {
+    arrayOfImages = JSON.parse(sessionStorage.getItem("photos"));
 }
 
 //get data from local storage
@@ -123,11 +123,11 @@ function addElementsToPageFrom(drags) {
 // Local storage funcions
 
 function addDataToLocalStorage(arrayOfImages) {
-    window.localStorage.setItem("photos", JSON.stringify(arrayOfImages));
+    window.sessionStorage.setItem("photos", JSON.stringify(arrayOfImages));
 }
 
 function getDataFromLocalStorage() {
-    let data = window.localStorage.getItem("photos");
+    let data = window.sessionStorage.getItem("photos");
     if (data) {
         let drags = JSON.parse(data);
         addElementsToPageFrom(drags);
