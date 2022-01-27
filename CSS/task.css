@@ -1,0 +1,104 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #eee;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: sans-serif;
+}
+
+header{
+    background-color: black;
+    width: 100%;
+    padding: 5px 0;
+}
+
+header h5{
+    color: white;
+    margin: 0;
+}
+header .profile{
+    padding: 2.5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .profile .p-img{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+header .profile .p-img img{
+    width: 100%;
+}
+header .profile span{
+    color: white;
+    font-size: 15px;
+    margin-left: 15px;
+}
+
+.hold {
+    border: solid 5px red;
+}
+
+.chart-drag p{
+    margin: 10px 0;
+    font-size: 15px;
+    color: #aaa;
+}
+
+.chart-drag .drag-contain.hovered {
+    background-color: #dfe9f3;
+    border-style: dashed;
+    border-color: #84c2ff;
+}
+
+.opacity {
+    opacity: 0.5;
+}
+
+.chart-list {
+    height: calc(100vh - 40px);
+    background-color: #fff;
+    overflow-y: scroll;
+}
+
+.chart-list .place {
+    width: 80%;
+    min-height: 100px;
+    margin: 20px auto;
+    border: 2px solid #eee;
+    border-radius: 5px;
+    /*overflow: hidden;*/
+}
+
+.chart-list img,
+.drag-contain img {
+    width: 100%;
+}
+
+.chart-drag .drag-contain {
+    background-color: #fbfbfb;
+    width: 100%;
+    border: 2px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+
+#r1d1{height: 200px;}
+#r1d2{height: 180px;}
+#r2d1{height: 150px;}
+#r2d2{height: 150px;}
+#r2d3{height: 180px;}
+#r2d4{height: 120px;}
+#r2d5{height: 180px;}
+#r2d6{height: 345px;}
+#r2d7{height: 345px;}
