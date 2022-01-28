@@ -71,7 +71,6 @@ function dragDrop() {
                     break;
                 }
         }
-        //console.log(it.parentElement.innerHTML);
         const photo = {
             id: this.getAttribute('id'),
             img: it.getAttribute('src'),
@@ -81,7 +80,14 @@ function dragDrop() {
         var res = updateArray(photo, arrayOfImages);
         if (!res) {
             arrayOfImages.push(photo);
+            for(var i = 0; i<(arrayOfImages.length-1); i++){
+                if(arrayOfImages[i].img == photo.img){
+                    arrayOfImages.splice(i, 1);
+                }
+            }
         }
+        //updateArrayImg(photo, arrayOfImages);
+        console.log(arrayOfImages);
 
         //Add photos to Local Storage
         addDataToLocalStorage(arrayOfImages);
@@ -97,21 +103,29 @@ function dragDrop() {
 
 
 function updateArray(photo, array) {
-    for (var i of array) {
-        if (i.id == photo.id) {
-            i.img = photo.img;
-            return true;
+    var flag = false
+    for (var data of array) {
+        if (data.id == photo.id) {
+            for(var i = 0; i<array.length; i++){
+                if(array[i].img == photo.img){
+                    array.splice(i, 1);
+                }
+            }
+            data.img = photo.img;
+            flag = true;
         }
     }
-    return false;
+    return flag;
 }
 
 function addElementsToPageFrom(drags) {
     for (var data of drags) {
         for (var container of contains) {
             if (data.id == container.getAttribute('id')) {
+                //console.log(data.id);
                 for (var image of images) {
-                    if(data.img == image.getAttribute('src')){
+                    if (data.img == image.getAttribute('src')) {
+                        //console.log(container);
                         container.append(image);
                     }
                 }
