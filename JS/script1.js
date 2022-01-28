@@ -61,6 +61,7 @@ function dragLeave() {
 function dragDrop() {
     this.classList.remove('hovered');
     if (this.className == 'drag-contain') {
+        //console.log(this.hasChildNodes())
         if (!this.hasChildNodes()) {
             this.append(it);
         } else {
@@ -80,11 +81,7 @@ function dragDrop() {
         var res = updateArray(photo, arrayOfImages);
         if (!res) {
             arrayOfImages.push(photo);
-            for(var i = 0; i<(arrayOfImages.length-1); i++){
-                if(arrayOfImages[i].img == photo.img){
-                    arrayOfImages.splice(i, 1);
-                }
-            }
+            update(photo, arrayOfImages);
         }
         //updateArrayImg(photo, arrayOfImages);
         console.log(arrayOfImages);
@@ -93,43 +90,76 @@ function dragDrop() {
         addDataToLocalStorage(arrayOfImages);
         /*******************************************************/
     } else if (this.className == 'chart-list') {
-        for (var list of places)
+        for (var list of places) {
             if (list.childElementCount == 0) {
+                const photoo = {
+                    element: list.getAttribute('id'),
+                    img: it.getAttribute('src'),
+                };
+                arrayOfImages.push(photoo);
+                update(photoo, arrayOfImages);
+                addDataToLocalStorage(arrayOfImages);
+                
+                console.log(arrayOfImages);
                 list.append(it);
                 break;
             }
+        }
     }
 }
 
 
 function updateArray(photo, array) {
-    var flag = false
     for (var data of array) {
         if (data.id == photo.id) {
-            for(var i = 0; i<array.length; i++){
-                if(array[i].img == photo.img){
+            for (var i = 0; i < array.length; i++) {
+                if (array[i].img == photo.img) {
                     array.splice(i, 1);
                 }
             }
             data.img = photo.img;
-            flag = true;
+            return true;
         }
     }
-    return flag;
+    return false;
 }
 
+
+//Update array when change the place of photo
+function update(photo, array) {
+    for (var i = 0; i < (array.length - 1); i++) {
+        if (array[i].img == photo.img) {
+            array.splice(i, 1);
+        }
+    }
+}
+
+
+//Add elements to page
 function addElementsToPageFrom(drags) {
     for (var data of drags) {
-        for (var container of contains) {
-            if (data.id == container.getAttribute('id')) {
-                //console.log(data.id);
-                for (var image of images) {
-                    if (data.img == image.getAttribute('src')) {
-                        //console.log(container);
-                        container.append(image);
+        if (data.id) {
+            for (var container of contains) {
+                if (data.id == container.getAttribute('id')) {
+                    for (var image of images) {
+                        if (data.img == image.getAttribute('src')) {
+                            container.append(image);
+                        }
                     }
                 }
             }
+        }else if (data.element){
+            for (var place of places) {
+                if (data.element == place.getAttribute('id')) {
+                    //console.log(data.element);
+                    for (var image of images) {
+                        if (data.img == image.getAttribute('src')) {
+                            //console.log(container);
+                            place.append(image);
+                        }
+                    }
+                }
+            }   
         }
     }
 }

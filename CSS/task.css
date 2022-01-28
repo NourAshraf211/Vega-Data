@@ -3,12 +3,16 @@
 }
 
 body {
-    background-color: #eee;
+    background-color: #f1f1f1;
     margin: 0;
     overflow-x: hidden;
     font-family: sans-serif;
 }
 
+.display{
+    display: none;
+}
+/********************************/
 header{
     background-color: black;
     width: 100%;
@@ -40,15 +44,11 @@ header .profile span{
     font-size: 15px;
     margin-left: 15px;
 }
-
-.hold {
-    border: solid 5px red;
-}
-
+/********************************/
 .chart-drag p{
     margin: 10px 0;
     font-size: 15px;
-    color: #aaa;
+    color: #979797;
 }
 
 .chart-list.hovered{
@@ -62,9 +62,6 @@ header .profile span{
     border-color: #84c2ff;
 }
 
-.opacity {
-    opacity: 0.5;
-}
 
 .chart-list {
     height: calc(100vh - 40px);
@@ -85,6 +82,7 @@ header .profile span{
 .drag-contain img {
     width: 100%;
     cursor: move;
+    z-index: 999;
 }
 
 .chart-drag .drag-contain {
@@ -96,15 +94,75 @@ header .profile span{
     align-items: center;
     overflow: hidden;
     border-radius: 5px;
+    color: #c7c7c7;
+    text-align: center;
 }
 
+.chart-drag .drag-contain h1{
+    color: #c7c7c7;
+    text-align: center;
+    font-size: 20px;
+}
 
 #r1d1{height: 200px;}
+#r1d1::after{
+    content: '540px * 200px';
+    position: absolute;
+    font-size: 30px;
+}
+
 #r1d2{height: 180px;}
+#r1d2::after{
+    content: '540px * 180px';
+    position: absolute;
+    font-size: 30px;
+}
+
 #r2d1{height: 150px;}
+#r2d1::after{
+    content: '350px * 150px';
+    position: absolute;
+    font-size: 25px;
+}
+
 #r2d2{height: 150px;}
+#r2d2::after{
+    content: '160px * 150px';
+    position: absolute;
+    font-size: 20px;
+}
+
 #r2d3{height: 180px;}
+#r2d3::after{
+    content: '160px * 180px';
+    position: absolute;
+    font-size: 20px;
+}
+
 #r2d4{height: 120px;}
+#r2d4::after{
+    content: '160px * 120px';
+    position: absolute;
+    font-size: 20px;
+}
+
 #r2d5{height: 180px;}
+#r2d5::after{
+    content: '160px * 180px';
+    position: absolute;
+    font-size: 20px;
+}
+
 #r2d6{height: 345px;}
+#r2d6::after{
+    content: '255px * 345px';
+    position: absolute;
+    font-size: 25px;
+}
+
 #r2d7{height: 345px;}
+#r2d7::after{
+    content: '255px * 345px';
+    position: absolute;
+    font-size: 25px;
+}
